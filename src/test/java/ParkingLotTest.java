@@ -74,10 +74,27 @@ public class ParkingLotTest {
         Message message1 = parkingService.parkCar(parkingLot, car);
         Ticket ticket = message1.getTicket();
         //When
-        Message message2 = parkingService.fetchCar(parkingLot,ticket);
-        String result2 = message2.getResultMsg();
+        Message resMessage = parkingService.fetchCar(parkingLot,ticket);
+        String result2 = resMessage.getResultMsg();
         //Then
         assertEquals("取车成功", result2);
-        assertEquals(car,message2.getCar());
+        assertEquals(car,resMessage.getCar());
+    }
+
+    @Test
+    public void test_given_parking_lot_and_wrong_ticket_when_fetch_then_failure(){
+        //Given
+        ParkingLot parkingLot = new ParkingLot("parkingLot");
+        Car car = new Car("myCar");
+        ParkingService parkingService = new ParkingService();
+        Message message1 = parkingService.parkCar(parkingLot, car);
+        Ticket ticket = message1.getTicket();
+        Ticket wrongTicket = new Ticket(parkingLot.getParkingLotName(), car.getCarName(), 12345678);
+
+        //When
+        Message resMessage = parkingService.fetchCar(parkingLot,wrongTicket);
+
+        //Then
+        assertEquals("Ticket不正确", resMessage.getResultMsg());
     }
 }

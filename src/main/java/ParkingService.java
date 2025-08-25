@@ -9,6 +9,7 @@ public class ParkingService {
     public final static String PARK_FAILURE = "停车失败";
     public final static String DUPLICATE = "该车已停放";
     public final static String FETCH_SUCCESS = "取车成功";
+    public final static String WRONG_TICKET ="Ticket不正确";
 
     ParkingService() {
     }
@@ -46,7 +47,7 @@ public class ParkingService {
     public Message fetchCar(ParkingLot parkingLot, Ticket ticket) {
         int ticketOid = ticket.getTicketOid();
         if (!hashMap.containsKey(ticketOid)){
-            return null;
+            return new Message(WRONG_TICKET);
         }
         String carName = ticket.getCarName();
         Car myCar = null;
