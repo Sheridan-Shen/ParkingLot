@@ -1,5 +1,8 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParkingLotTest {
@@ -129,5 +132,23 @@ public class ParkingLotTest {
 
         //Then
         assertEquals("Unrecognized parking ticket.", resMessage2.getResultMsg());
+    }
+
+    @Test
+    public void test_given_parking_lot_and_a_car_and_a_boy_when_park_then_success() {
+        //Given
+        ParkingLot parkingLot1=new ParkingLot("parkingLot1",20);
+        ParkingLot parkingLot2=new ParkingLot("parkingLot2",10);
+        ArrayList<ParkingLot> parkingLots = new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2));
+        Car car = new Car("myCar");
+        //When
+        ParkingBoy parkingBoy=new ParkingBoy("boy",parkingLots);
+        Message message = parkingBoy.manualParkCar(car);
+        Ticket ticket = message.getTicket();
+        String result = message.getResultMsg();
+        //Then
+        assertEquals("停车成功", result);
+        assertEquals("parkingLot1", ticket.getParkingLotName());
+        assertEquals("myCar", ticket.getCarName());
     }
 }
