@@ -7,6 +7,10 @@ public class ParkingLot {
         this.parkingLotName = name;
     }
 
+    ParkingLot(String name,Integer capacity){
+        this.parkingLotName = name;
+        this.capacity=capacity;
+    }
     public int getCapacity() {
         return capacity;
     }

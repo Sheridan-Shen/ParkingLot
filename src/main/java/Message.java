@@ -13,6 +13,10 @@ public class Message {
         this.car = car;
     }
 
+    Message(String resultMsg){
+        this.resultMsg = resultMsg;
+    }
+
     public String getResultMsg() {
         return resultMsg;
     }
