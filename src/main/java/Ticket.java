@@ -1,12 +1,12 @@
 public class Ticket {
+    private int ticketOid;
     private String parkingLotName;
     private String carName;
-    private boolean isUsed;
 
-    Ticket(String parkingLotName, String carName){
+    Ticket(String parkingLotName, String carName, int ticketOid){
         this.parkingLotName = parkingLotName;
         this.carName = carName;
-        this.isUsed = false;
+        this.ticketOid = ticketOid;
     }
 
     public String getParkingLotName() {
@@ -25,11 +25,7 @@ public class Ticket {
         this.carName = carName;
     }
 
-    public boolean isUsed() {
-        return isUsed;
-    }
-
-    public void setUsed(boolean used) {
-        isUsed = used;
+    public int getTicketOid() {
+        return ticketOid;
     }
 }

@@ -63,6 +63,21 @@ public class ParkingLotTest {
         String result1 = message1.getResultMsg();
         //Then
         assertEquals("停车失败", result1);
+    }
 
+    @Test
+    public void test_given_parking_lot_and_ticket_when_fetch_then_success(){
+        //Given
+        ParkingLot parkingLot = new ParkingLot("parkingLot");
+        Car car = new Car("myCar");
+        ParkingService parkingService = new ParkingService();
+        Message message1 = parkingService.parkCar(parkingLot, car);
+        Ticket ticket = message1.getTicket();
+        //When
+        Message message2 = parkingService.fetchCar(parkingLot,ticket);
+        String result2 = message2.getResultMsg();
+        //Then
+        assertEquals("取车成功", result2);
+        assertEquals(car,message2.getCar());
     }
 }
