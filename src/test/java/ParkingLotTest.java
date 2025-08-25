@@ -97,4 +97,20 @@ public class ParkingLotTest {
         //Then
         assertEquals("Ticket不正确", resMessage.getResultMsg());
     }
+
+    @Test
+    public void test_given_parking_lot_without_ticket_when_fetch_then_failure(){
+        //Given
+        ParkingLot parkingLot = new ParkingLot("parkingLot");
+        Car car = new Car("myCar");
+        ParkingService parkingService = new ParkingService();
+        Message message1 = parkingService.parkCar(parkingLot, car);
+        Ticket ticket = message1.getTicket();
+
+        //When
+        Message resMessage = parkingService.fetchCar(parkingLot,null);
+
+        //Then
+        assertEquals("没有Ticket", resMessage.getResultMsg());
+    }
 }
