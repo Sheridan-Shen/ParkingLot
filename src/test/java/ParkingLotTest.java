@@ -1,6 +1,7 @@
 import Controller.Message;
 import Dao.Car;
 import Service.ParkingBoyService.Impl.SmartParkingBoyStrategy;
+import Service.ParkingBoyService.Impl.SuperParkingBoyStrategy;
 import Service.ParkingBoyService.ParkingBoy;
 import Dao.ParkingLot;
 import Dao.Ticket;
@@ -250,6 +251,28 @@ public class ParkingLotTest {
         assertEquals("No available position", message.getResultMsg());
     }
 
+    @Test
+    public void test_super_parking_boy_strategy(){
+        //Given
+        ParkingLot parkingLot1 = new ParkingLot("parkingLot1",15);
+        ParkingLot parkingLot2 = new ParkingLot("parkingLot2",20);
+        ArrayList<ParkingLot> parkingLots = new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2));
+        Car car1 = new Car("myCar1");
+        Car car2 = new Car("myCar2");
+        Car car3 = new Car("myCar3");
+        Car car4 = new Car("myCar4");
+        //When
+        ParkingBoy parkingBoy=new ParkingBoy("boy",parkingLots, new SuperParkingBoyStrategy());
 
+        //Then
+        parkingBoy.manualParkCar(car1);
+        assertEquals(14, parkingLot1.getCapacity());
+        parkingBoy.manualParkCar(car2);
+        assertEquals(19, parkingLot2.getCapacity());
+        parkingBoy.manualParkCar(car3);
+        assertEquals(18, parkingLot2.getCapacity());
+        parkingBoy.manualParkCar(car4);
+        assertEquals(13, parkingLot1.getCapacity());
+    }
 
 }
