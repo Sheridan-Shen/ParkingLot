@@ -36,7 +36,7 @@ public class ParkingLotTest {
         String result2 = message2.getResultMsg();
         //Then
         assertEquals("停车成功", result1);
-        assertEquals("停车失败", result2);
+        assertEquals("No available position", result2);
     }
 
     @Test
@@ -226,6 +226,21 @@ public class ParkingLotTest {
         String result2 = resMessage2.getResultMsg();
         //Then
         assertEquals("Unrecognized parking ticket.", result2);
+    }
+
+    @Test
+    public void test_given_two_full_parking_lot_and_ticket_with_boy_when_park_then_failure(){
+        //Given
+        ParkingLot parkingLot1 = new ParkingLot("parkingLot1",0);
+        ParkingLot parkingLot2 = new ParkingLot("parkingLot2",0);
+        ArrayList<ParkingLot> parkingLots = new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2));
+        Car car = new Car("myCar");
+        //When
+        ParkingBoy parkingBoy=new ParkingBoy("boy",parkingLots);
+        Message message = parkingBoy.manualParkCar(car);
+
+        //Then
+        assertEquals("No available position", message.getResultMsg());
     }
 
 }

@@ -13,13 +13,14 @@ public class ParkingService {
     public final static String NO_TICKET = "没有Ticket";
     public final static String USED_TICKET = "Unrecognized parking ticket.";
     public final static String NO_PARKING_LOT = "Unrecognized parking ticket.";
+    public final static String NO_AVAILABLE_POSITION="No available position";
 
     ParkingService() {
     }
 
     public Message parkCar(ParkingLot parkingLot, Car car) {
         if (parkingLot.getCapacity() <= 0) {
-            return new Message(PARK_FAILURE);
+            return new Message(NO_AVAILABLE_POSITION);
         }
         if (parkedCar.contains(car)) {
             return new Message(DUPLICATE);
