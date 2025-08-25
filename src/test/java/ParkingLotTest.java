@@ -1,6 +1,7 @@
 import Controller.Message;
 import Dao.Car;
-import Dao.ParkingBoy;
+import Service.ParkingBoyService.Impl.SmartParkingBoyStrategy;
+import Service.ParkingBoyService.ParkingBoy;
 import Dao.ParkingLot;
 import Dao.Ticket;
 import Service.ParkingService;
@@ -148,7 +149,7 @@ public class ParkingLotTest {
         ArrayList<ParkingLot> parkingLots = new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2));
         Car car = new Car("myCar");
         //When
-        ParkingBoy parkingBoy=new ParkingBoy("boy",parkingLots);
+        ParkingBoy parkingBoy=new ParkingBoy("boy",parkingLots, new SmartParkingBoyStrategy());
         Message message = parkingBoy.manualParkCar(car);
         Ticket ticket = message.getTicket();
         String result = message.getResultMsg();
@@ -166,7 +167,7 @@ public class ParkingLotTest {
         ArrayList<ParkingLot> parkingLots = new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2));
         Car car = new Car("myCar");
         //When
-        ParkingBoy parkingBoy=new ParkingBoy("boy",parkingLots);
+        ParkingBoy parkingBoy=new ParkingBoy("boy",parkingLots, new SmartParkingBoyStrategy());
         Message message = parkingBoy.manualParkCar(car);
         Ticket ticket = message.getTicket();
         String result = message.getResultMsg();
@@ -183,7 +184,7 @@ public class ParkingLotTest {
         ParkingLot parkingLot2 = new ParkingLot("parkingLot2");
         ArrayList<ParkingLot> parkingLots = new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2));
         Car car = new Car("myCar");
-        ParkingBoy parkingBoy=new ParkingBoy("boy",parkingLots);
+        ParkingBoy parkingBoy=new ParkingBoy("boy",parkingLots, new SmartParkingBoyStrategy());
         Message message = parkingBoy.manualParkCar(car);
         Ticket ticket = message.getTicket();
 
@@ -202,7 +203,7 @@ public class ParkingLotTest {
         ParkingLot parkingLot2 = new ParkingLot("parkingLot2");
         ArrayList<ParkingLot> parkingLots = new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2));
         Car car = new Car("myCar");
-        ParkingBoy parkingBoy=new ParkingBoy("boy",parkingLots);
+        ParkingBoy parkingBoy=new ParkingBoy("boy",parkingLots, new SmartParkingBoyStrategy());
         Message message = parkingBoy.manualParkCar(car);
         Ticket ticket = message.getTicket();
 
@@ -222,7 +223,7 @@ public class ParkingLotTest {
         ParkingLot parkingLot2 = new ParkingLot("parkingLot2");
         ArrayList<ParkingLot> parkingLots = new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2));
         Car car = new Car("myCar");
-        ParkingBoy parkingBoy=new ParkingBoy("boy",parkingLots);
+        ParkingBoy parkingBoy=new ParkingBoy("boy",parkingLots, new SmartParkingBoyStrategy());
         Message message = parkingBoy.manualParkCar(car);
         Ticket ticket = message.getTicket();
 
@@ -242,7 +243,7 @@ public class ParkingLotTest {
         ArrayList<ParkingLot> parkingLots = new ArrayList<>(Arrays.asList(parkingLot1, parkingLot2));
         Car car = new Car("myCar");
         //When
-        ParkingBoy parkingBoy=new ParkingBoy("boy",parkingLots);
+        ParkingBoy parkingBoy=new ParkingBoy("boy",parkingLots, new SmartParkingBoyStrategy());
         Message message = parkingBoy.manualParkCar(car);
 
         //Then

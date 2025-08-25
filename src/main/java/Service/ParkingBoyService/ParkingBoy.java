@@ -1,6 +1,9 @@
-package Dao;
+package Service.ParkingBoyService;
 
 import Controller.Message;
+import Dao.Car;
+import Dao.ParkingLot;
+import Dao.Ticket;
 import Service.ParkingService;
 
 import java.util.ArrayList;
@@ -10,20 +13,16 @@ public class ParkingBoy {
     private String boyName;
     private ArrayList<ParkingLot> parkingLots;
     ParkingService parkingService = new ParkingService();
+    ParkStrategy parkStrategy;
 
-    public ParkingBoy(String boyName, ArrayList<ParkingLot> parkingLots) {
+    public ParkingBoy(String boyName, ArrayList<ParkingLot> parkingLots, ParkStrategy parkStrategy) {
         this.boyName = boyName;
         this.parkingLots = parkingLots;
+        this.parkStrategy = parkStrategy;
     }
 
-
     public Message manualParkCar(Car car) {
-        ParkingLot targetParkingLot = parkingLots.get(0);
-        for (ParkingLot parkinglot : parkingLots) {
-            if (parkinglot.getCapacity() > targetParkingLot.getCapacity())
-                targetParkingLot = parkinglot;
-        }
-        return parkingService.parkCar(targetParkingLot, car);
+        return parkStrategy.manualParkCar(car, parkingLots, parkingService);
     }
 
     public Message manualFetchCar(Ticket ticket) {
