@@ -12,6 +12,7 @@ public class ParkingService {
     public final static String WRONG_TICKET = "Unrecognized parking ticket.";
     public final static String NO_TICKET = "没有Ticket";
     public final static String USED_TICKET = "Unrecognized parking ticket.";
+    public final static String NO_PARKING_LOT = "Unrecognized parking ticket.";
 
     ParkingService() {
     }
@@ -43,6 +44,9 @@ public class ParkingService {
     public Message fetchCar(ParkingLot parkingLot, Ticket ticket) {
         if (ticket == null) {
             return new Message(NO_TICKET);
+        }
+        if (parkingLot == null){
+            return new Message(NO_PARKING_LOT);
         }
         int ticketOid = ticket.getTicketOid();
         if (!hashMap.containsKey(ticketOid)) {
