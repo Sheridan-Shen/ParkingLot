@@ -1,13 +1,15 @@
+package Dao;
+
 public class ParkingLot {
     private String parkingLotName;
 
     private int capacity = 10;
 
-    ParkingLot(String name){
+    public ParkingLot(String name){
         this.parkingLotName = name;
     }
 
-    ParkingLot(String name,Integer capacity){
+    public ParkingLot(String name, Integer capacity){
         this.parkingLotName = name;
         this.capacity=capacity;
     }

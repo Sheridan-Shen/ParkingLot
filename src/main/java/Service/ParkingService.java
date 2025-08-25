@@ -1,3 +1,10 @@
+package Service;
+
+import Controller.Message;
+import Dao.Car;
+import Dao.ParkingLot;
+import Dao.Ticket;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
@@ -15,7 +22,7 @@ public class ParkingService {
     public final static String NO_PARKING_LOT = "Unrecognized parking ticket.";
     public final static String NO_AVAILABLE_POSITION="No available position";
 
-    ParkingService() {
+    public ParkingService() {
     }
 
     public Message parkCar(ParkingLot parkingLot, Car car) {

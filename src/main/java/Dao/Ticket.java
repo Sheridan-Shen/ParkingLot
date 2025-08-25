@@ -1,9 +1,11 @@
+package Dao;
+
 public class Ticket {
     private int ticketOid;
     private String parkingLotName;
     private String carName;
 
-    Ticket(String parkingLotName, String carName, int ticketOid){
+    public Ticket(String parkingLotName, String carName, int ticketOid){
         this.parkingLotName = parkingLotName;
         this.carName = carName;
         this.ticketOid = ticketOid;

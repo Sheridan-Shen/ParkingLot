@@ -1,3 +1,8 @@
+package Dao;
+
+import Controller.Message;
+import Service.ParkingService;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -6,7 +11,7 @@ public class ParkingBoy {
     private ArrayList<ParkingLot> parkingLots;
     ParkingService parkingService = new ParkingService();
 
-    ParkingBoy(String boyName, ArrayList<ParkingLot> parkingLots) {
+    public ParkingBoy(String boyName, ArrayList<ParkingLot> parkingLots) {
         this.boyName = boyName;
         this.parkingLots = parkingLots;
     }

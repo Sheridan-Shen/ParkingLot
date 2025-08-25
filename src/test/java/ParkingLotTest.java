@@ -1,3 +1,9 @@
+import Controller.Message;
+import Dao.Car;
+import Dao.ParkingBoy;
+import Dao.ParkingLot;
+import Dao.Ticket;
+import Service.ParkingService;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -242,5 +248,7 @@ public class ParkingLotTest {
         //Then
         assertEquals("No available position", message.getResultMsg());
     }
+
+
 
 }
