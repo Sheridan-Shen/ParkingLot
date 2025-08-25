@@ -12,6 +12,12 @@ public class ParkingBoy {
 
     public Message manualParkCar(Car car) {
         ParkingService parkingService = new ParkingService();
-        return parkingService.parkCar(parkingLots.get(0),car);
+        ParkingLot targetParkingLot=parkingLots.get(0);
+        for(ParkingLot parkinglot:parkingLots)
+        {
+            if(parkinglot.getCapacity()>targetParkingLot.getCapacity())
+                targetParkingLot=parkinglot;
+        }
+        return parkingService.parkCar(targetParkingLot,car);
     }
 }

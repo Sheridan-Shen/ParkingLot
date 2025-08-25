@@ -59,6 +59,7 @@ public class ParkingService {
             }
         }
         parkedCar.remove(myCar);
+        parkingLot.setCapacity(parkingLot.getCapacity() + 1);
         hashMap.put(ticketOid, false);
         return new Message(FETCH_SUCCESS, myCar);
     }
