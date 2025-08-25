@@ -22,6 +22,11 @@ public class ParkingService {
             Message message=new Message(DUPLICATE);
             return  message;
         }
+        if(car==null)
+        {
+            Message message=new Message(PARK_FAILURE);
+            return message;
+        }
         Ticket ticket = new Ticket(parkingLot.getParkingLotName(), car.getCarName());
         int tickedOid = getHashCode(parkingLot, car);
         hashMap.put(tickedOid, true);

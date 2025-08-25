@@ -51,4 +51,18 @@ public class ParkingLotTest {
         assertEquals("停车成功", result1);
         assertEquals("该车已停放", result2);
     }
+
+    @Test
+    public void test_given_parking_lot_and_null_car_when_park_then_failure(){
+        //Given
+        ParkingLot parkingLot = new ParkingLot("parkingLot");
+
+        ParkingService parkingService = new ParkingService();
+        //When
+        Message message1 = parkingService.parkCar(parkingLot, null);
+        String result1 = message1.getResultMsg();
+        //Then
+        assertEquals("停车失败", result1);
+
+    }
 }
