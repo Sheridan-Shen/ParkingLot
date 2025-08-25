@@ -95,7 +95,7 @@ public class ParkingLotTest {
         Message resMessage = parkingService.fetchCar(parkingLot,wrongTicket);
 
         //Then
-        assertEquals("Ticket不正确", resMessage.getResultMsg());
+        assertEquals("Unrecognized parking ticket.", resMessage.getResultMsg());
     }
 
     @Test
@@ -112,5 +112,22 @@ public class ParkingLotTest {
 
         //Then
         assertEquals("没有Ticket", resMessage.getResultMsg());
+    }
+
+    @Test
+    public void test_given_parking_lot_used_ticket_when_fetch_then_failure(){
+        //Given
+        ParkingLot parkingLot = new ParkingLot("parkingLot");
+        Car car = new Car("myCar");
+        ParkingService parkingService = new ParkingService();
+        Message message1 = parkingService.parkCar(parkingLot, car);
+        Ticket ticket = message1.getTicket();
+
+        //When
+        Message resMessage1 = parkingService.fetchCar(parkingLot,ticket);
+        Message resMessage2 = parkingService.fetchCar(parkingLot,ticket);
+
+        //Then
+        assertEquals("Unrecognized parking ticket.", resMessage2.getResultMsg());
     }
 }

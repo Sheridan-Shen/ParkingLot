@@ -9,24 +9,22 @@ public class ParkingService {
     public final static String PARK_FAILURE = "停车失败";
     public final static String DUPLICATE = "该车已停放";
     public final static String FETCH_SUCCESS = "取车成功";
-    public final static String WRONG_TICKET = "Ticket不正确";
+    public final static String WRONG_TICKET = "Unrecognized parking ticket.";
     public final static String NO_TICKET = "没有Ticket";
+    public final static String USED_TICKET = "Unrecognized parking ticket.";
 
     ParkingService() {
     }
 
     public Message parkCar(ParkingLot parkingLot, Car car) {
         if (parkingLot.getCapacity() <= 0) {
-            Message message = new Message(PARK_FAILURE);
-            return message;
+            return new Message(PARK_FAILURE);
         }
         if (parkedCar.contains(car)) {
-            Message message = new Message(DUPLICATE);
-            return message;
+            return new Message(DUPLICATE);
         }
         if (car == null) {
-            Message message = new Message(PARK_FAILURE);
-            return message;
+            return new Message(PARK_FAILURE);
         }
         int tickedOid = getHashCode(parkingLot, car);
         Ticket ticket = new Ticket(parkingLot.getParkingLotName(), car.getCarName(), tickedOid);
@@ -34,8 +32,7 @@ public class ParkingService {
         hashMap.put(tickedOid, true);
         parkedCar.add(car);
         parkingLot.setCapacity(parkingLot.getCapacity() - 1);
-        Message message = new Message(PARK_SUCCESS, ticket);
-        return message;
+        return new Message(PARK_SUCCESS, ticket);
     }
 
     private int getHashCode(ParkingLot parkingLot, Car car) {
@@ -45,12 +42,14 @@ public class ParkingService {
 
     public Message fetchCar(ParkingLot parkingLot, Ticket ticket) {
         if (ticket == null) {
-            Message message = new Message(NO_TICKET);
-            return message;
+            return new Message(NO_TICKET);
         }
         int ticketOid = ticket.getTicketOid();
         if (!hashMap.containsKey(ticketOid)) {
             return new Message(WRONG_TICKET);
+        }
+        if (!hashMap.get(ticketOid)) {
+            return new Message(USED_TICKET);
         }
         String carName = ticket.getCarName();
         Car myCar = null;
@@ -59,7 +58,8 @@ public class ParkingService {
                 myCar = car;
             }
         }
-        Message message = new Message(FETCH_SUCCESS, myCar);
-        return message;
+        parkedCar.remove(myCar);
+        hashMap.put(ticketOid, false);
+        return new Message(FETCH_SUCCESS, myCar);
     }
 }
